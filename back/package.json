@@ -1,0 +1,35 @@
+{
+  "name": "back_pokelink",
+  "version": "1.0.0",
+  "description": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Sraime/node-sample.git"
+  },
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js",
+    "test": "npm run test:unit",
+    "test:unit": "jest ./test/unit/*/*.spec.js",
+    "linter": "eslint app test statics",
+    "linter:fix": "eslint app test statics --fix"
+  },
+  "author": "Robin COLLAS",
+  "license": "ISC",
+  "dependencies": {
+    "acorn": "^6.2.0",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "nodemon": "^1.19.1",
+    "mongoose": "^5.6.4",
+    "bcryptjs": "^2.4.3"
+  },
+  "devDependencies": {
+    "cors": "^2.8.5",
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb-base": "^13.2.0",
+    "eslint-plugin-import": "^2.18.0",
+    "jest": "^24.8.0"
+  }
+}

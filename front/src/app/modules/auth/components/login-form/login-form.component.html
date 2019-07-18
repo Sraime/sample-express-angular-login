@@ -1,0 +1,17 @@
+
+<p *ngIf="idInvalidAuth" id="login-error">email ou mot de passe invalide</p>
+<form (ngSubmit)="onSubmit()" [formGroup]="form" id="login-form">
+
+  <div class="field">
+      <label for="login-email">Email</label>
+      <input formControlName="email" type="email" name="email" id="login-email">
+  </div>
+
+  <div class="field">
+      <label for="login-password">Mdp</label>
+      <input formControlName="password" type="password" name="password" id="login-password">
+  </div>
+
+  <button type="submit">connexion</button>
+  
+</form>

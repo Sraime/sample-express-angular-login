@@ -1,0 +1,24 @@
+{
+  "name": "poc_codecept",
+  "version": "1.0.0",
+  "description": "Sample projet for an express app. Perfect to begin.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Sraime/node-sample.git"
+  },
+  "main": "app.js",
+  "scripts": {
+    "cc:init": "codeceptjs init",
+    "cc:run": "codeceptjs run",
+    "cc:gt": "codeceptjs gt",
+    "cc:gherkin:init": "codeceptjs gherkin:init",
+    "cc:gherkin:snippets": "codeceptjs gherkin:snippets"
+  },
+  "author": "Robin COLLAS",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "codeceptjs": "^2.0.7",
+    "puppeteer": "^1.13.0"
+  }
+}
