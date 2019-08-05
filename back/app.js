@@ -3,12 +3,12 @@ const routes = require('./app/routes');
 const bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var cors = require('cors');
-
+var config = require('./config');
 
 const app = express();
 
 //Set up default mongoose connection
-var mongoDB = 'mongodb://127.0.0.1/pokelink';
+var mongoDB = 'mongodb://' + config.mongodb.host + ':' + config.mongodb.port + '/' + config.mongodb.db;
 mongoose.connect(mongoDB, { useNewUrlParser: true })
 .then(() => {
   console.log('Connection to database has been established successfully.');
@@ -23,9 +23,12 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 app.use(bodyParser.json());
-
+app.use(function (req, res, next) {
+  console.log("received : "+req.method+" "+req.originalUrl+" (Authorization: "+req.get("Authorization")+")");
+  next();
+});
 app.use('/', routes);
 
-app.listen(3000, function () {
-  console.log('Example app listening on port 3000!');
+app.listen(config.app.port, function () {
+  console.log('[ENV='+config.app.env+'] Application running on port '+config.app.port);
 })

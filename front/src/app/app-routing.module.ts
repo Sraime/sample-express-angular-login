@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component'
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component'
 import { LoginActivate } from './modules/auth/LoginActivateGuard';
 
 const appRoutes: Routes = [
-  { path: '',   redirectTo: '/auth/singin', pathMatch: 'full', canActivate: [LoginActivate]},
+  { path: '',   redirectTo: '/auth/login', pathMatch: 'full', canActivate: [LoginActivate]},
   { path: '**', component: PageNotFoundComponent }
 ]
 

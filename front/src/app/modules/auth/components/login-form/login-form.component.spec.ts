@@ -4,29 +4,43 @@ import { LoginFormComponent } from './login-form.component';
 import { By } from '@angular/platform-browser';
 import { AuthService } from '../../services/auth.service';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, }   from '@angular/forms';
 import { of, throwError } from 'rxjs';
-
+import { Router } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatCardModule, MatButtonModule, MatFormFieldModule, MatInputModule } from '@angular/material';
+import { configureTestSuite } from 'ng-bullet';
 
 describe('LoginFormComponent', () => {
   let component: LoginFormComponent;
   let fixture: ComponentFixture<LoginFormComponent>;
   let authService: AuthService;
+  let router = {
+      navigate: jest.fn()
+  };
 
-  beforeEach(async(() => {
+  configureTestSuite(() => {
     TestBed.configureTestingModule({
       declarations: [ LoginFormComponent ],
-      imports: [ HttpClientModule, FormsModule, ReactiveFormsModule ],
-      providers: [ AuthService ]
+      imports: [ HttpClientModule, FormsModule, ReactiveFormsModule ,
+        MatCardModule, MatButtonModule, MatFormFieldModule, MatInputModule,
+        BrowserAnimationsModule
+      ],
+      providers: [ 
+        AuthService, 
+        { 
+          provide: Router, 
+          useValue: router
+        }
+      ]
     })
-    .compileComponents();
-    authService = TestBed.get(AuthService);
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(LoginFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    authService = TestBed.get(AuthService);
   });
 
   it('should create', () => {
@@ -85,16 +99,16 @@ describe('LoginFormComponent', () => {
   }));
 
   describe('submit form', () => {
-    let spySingin;
+    let spyLogin;
 
     beforeEach(() => {
-       spySingin = jest.spyOn(authService, 'singin');
+      spyLogin = jest.spyOn(authService, 'login');
     });
     
     it('should request the server with given data', async(() => {
       const email = "aaaa@bb.cc";
       const pwd = "azery";
-      spySingin.mockReturnValue(of({}));
+      spyLogin.mockReturnValue(of({}));
 
       fixture.whenStable().then(() => {
         fixture.detectChanges();
@@ -107,12 +121,13 @@ describe('LoginFormComponent', () => {
         const btnLogin = fixture.debugElement.query(By.css('#login-form button'));
         btnLogin.nativeElement.click();
 
-        expect(spySingin).toHaveBeenCalledWith(email, pwd);
+        expect(spyLogin).toHaveBeenCalledWith(email, pwd);
       });
     }));
+    
 
     it('should turn to error when login fail', async(() => {
-      spySingin.mockReturnValue(throwError("error"));
+      spyLogin.mockReturnValue(throwError("error"));
       component.form.controls['email'].setValue("test@test.com");
       component.form.controls['password'].setValue("123456789");
       component.onSubmit();
@@ -121,7 +136,7 @@ describe('LoginFormComponent', () => {
 
     it('should reset the password field when login fail', async(() => {
       const pwd = "azery";
-      spySingin.mockReturnValue(throwError("error"));
+      spyLogin.mockReturnValue(throwError("error"));
 
       fixture.whenStable().then(() => {
         fixture.detectChanges();
@@ -134,20 +149,12 @@ describe('LoginFormComponent', () => {
       });
     }));
 
-    /*
-    il faut mock le setItem du localStorage ...
-    et le Date.new pour être sûr du set qui est fait en session
-    it('should set the session when the request succeed', () => {  
-      const response = {
-        pseudo: "zerg";
-        token: "fghj",
-        expiresIn: 1234
-      } 
-      spySingin.mockReturnValue(of(response));
+    it('should redirect to the bank page when login succeed', async(() => {
+      spyLogin.mockReturnValue(of());
+      component.onSubmit();
+      expect(router.navigate).toHaveBeenCalledWith(['/bank']);
+    }));
 
-      // faire un expect sur le set Item du localStorage
-    });
-    */
   });
 
 });

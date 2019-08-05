@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service'
-import { NgForm, FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -27,12 +27,9 @@ export class LoginFormComponent implements OnInit {
   }
 
   onSubmit() {
-    this.authService.singin(this.form.value.email, this.form.value.password)
+    this.authService.login(this.form.value.email, this.form.value.password)
       .subscribe((result) => {
-        localStorage.setItem('pseudo', result.pseudo.toString());
-        localStorage.setItem('token', result.token.toString());
-        localStorage.setItem('tokenExpiration', result.expiresIn.valueOf() + Date.now() + "");
-        this.router.navigate(['/banque']);
+        this.router.navigate(['/bank']);
       },() =>{
         this.idInvalidAuth = true;
         this.form.controls['password'].setValue("");

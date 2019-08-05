@@ -19,8 +19,6 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.app.json",
             "assets": [
-              "src/favicon.ico",
-              "src/assets"
             ],
             "styles": [
               "src/styles.css"
@@ -52,6 +50,14 @@
                   "maximumError": "5mb"
                 }
               ]
+            },
+            "test": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.test.ts"
+                }
+              ]
             }
           }
         },
@@ -63,6 +69,9 @@
           "configurations": {
             "production": {
               "browserTarget": "ngCliWebpackSample:build:production"
+            },
+            "test": {
+              "browserTarget": "ngCliWebpackSample:build:test"
             }
           }
         },
@@ -75,17 +84,13 @@
         "test": {
           "builder": "@angular-builders/jest:run",
           "options": {
-            "main": "src/test.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.spec.json",
-            "karmaConfig": "src/karma.conf.js",
             "styles": [
               "src/styles.css"
             ],
             "scripts": [],
             "assets": [
-              "src/favicon.ico",
-              "src/assets"
             ]
           }
         },

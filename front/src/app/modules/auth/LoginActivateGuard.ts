@@ -12,7 +12,7 @@ export class LoginActivate implements CanActivate {
     state: RouterStateSnapshot
   ): Observable<boolean>|Promise<boolean>|boolean {
     if (!this.authService.isLoggedIn()) {
-      this.router.navigate(['/auth/singin']);
+      this.router.navigate(['/auth/login']);
     }
     return true;
   }
