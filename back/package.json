@@ -12,7 +12,7 @@
     "start:dev": "nodemon app.js",
     "start:test": "NODE_ENV=test nodemon app.js",
     "test": "npm run test:unit",
-    "test:unit": "jest ./app/*/*/*.spec.js",
+    "test:unit": "jest ./app/*/*/*.spec.js --coverage --config ./jest.config.js",
     "test:integration": "jest --runInBand ./test/integration/*.spec.js --config ./test/integration/jest.config.js",
     "linter": "eslint app test statics",
     "linter:fix": "eslint app test statics --fix"
@@ -40,6 +40,14 @@
     "eslint-config-airbnb-base": "^13.2.0",
     "eslint-plugin-import": "^2.18.2",
     "jest": "^24.8.0",
+    "jest-sonar-reporter": "^2.0.0",
     "jsonschema": "^1.2.4"
+  },
+
+  "jestSonar": {
+    "reportPath": "reports",
+    "reportFile": "ut_report.xml",
+    "indent": 4,
+    "sonar56x": true
   }
 }
