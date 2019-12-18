@@ -25,7 +25,10 @@
   "gherkin": {
     "features": "./e2e/features/*.feature",
     "steps": [
-      "./e2e/steps/steps.js"
+      "./e2e/steps/steps.js",
+      "./e2e/steps/board.js",
+      "./e2e/steps/browse.js",
+      "./e2e/steps/auth.js"
     ]
   },
   "plugins": {

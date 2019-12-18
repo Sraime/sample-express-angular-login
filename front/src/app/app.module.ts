@@ -5,9 +5,9 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { LoginModule } from './modules/auth/auth.module';
-import { BanqueModule } from './modules/banque/banque.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule, MatButtonModule } from '@angular/material';
+import { BoardModule } from './modules/board/board.module';
 
 @NgModule({
   declarations: [
@@ -17,7 +17,7 @@ import { MatToolbarModule, MatButtonModule } from '@angular/material';
   imports: [
     BrowserModule,
     LoginModule,
-    BanqueModule,
+    BoardModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatToolbarModule,
